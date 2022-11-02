@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { api } from '../lib/axios';
+import { GetStaticProps } from 'next';
 
 import logoImage from '../assets/logo.svg'
 import appPreviewImage from '../assets/app-nlw-copa-preview.png'
@@ -48,7 +49,7 @@ export default function Home(props: HomeProps) {
         
         <form className='mt-10 flex gap-2' onSubmit={createPool}>
           <input 
-            className='flex-1 px-6 py-4 rounded bg-gray-800 border boder-gray-600 text-sm text-gray-100' 
+            className='flex-1 px-6 py-4 rounded bg-gray-800 border border-gray-600 text-sm text-gray-100' 
             type="text" 
             required placeholder='Qual nome do seu bolão?'
             onChange={event => setPoolTitle(event.target.value)}
@@ -84,7 +85,7 @@ export default function Home(props: HomeProps) {
   )
 }
 
-export const getServerSideProps = async() => {
+export const getStaticProps: GetStaticProps = async() => {
   const [poolCountResponse, guessCountResponse, userCountResponse] = await Promise.all([
     api.get('pools/count'),
     api.get('guesses/count'),
@@ -96,6 +97,7 @@ export const getServerSideProps = async() => {
       poolCount: poolCountResponse.data.count,
       guessCount: guessCountResponse.data.count,
       userCount: userCountResponse.data.count
-    }
+    },
+    revalidate: 60
   }
 }
