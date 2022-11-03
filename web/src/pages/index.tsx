@@ -9,7 +9,7 @@ import iconCheckImage from '../assets/icon-check.svg'
 import { FormEvent, useState } from 'react';
 
 interface HomeProps {
-  poolCount: number;
+  pollCount: number;
   guessCount: number;
   userCount: number;
 }
@@ -64,7 +64,7 @@ export default function Home(props: HomeProps) {
           <div className='flex items-center gap-6'>
             <Image src={iconCheckImage} alt=""/>
             <div className='flex flex-col'>
-              <span className='font-bold text-2xl'>+{props.poolCount}</span>
+              <span className='font-bold text-2xl'>+{props.pollCount}</span>
               <span>Bolões criados</span>
             </div>
           </div>
@@ -86,15 +86,15 @@ export default function Home(props: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async() => {
-  const [poolCountResponse, guessCountResponse, userCountResponse] = await Promise.all([
-    api.get('pools/count'),
+  const [pollCountResponse, guessCountResponse, userCountResponse] = await Promise.all([
+    api.get('polls/count'),
     api.get('guesses/count'),
     api.get('users/count')
   ])
 
   return {
     props: {
-      poolCount: poolCountResponse.data.count,
+      pollCount: pollCountResponse.data.count,
       guessCount: guessCountResponse.data.count,
       userCount: userCountResponse.data.count
     },

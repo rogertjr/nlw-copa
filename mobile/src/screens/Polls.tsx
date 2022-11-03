@@ -3,7 +3,7 @@ import { Header } from "../components/Header"
 import { Button } from "../components/Button"
 import { Fontisto } from '@expo/vector-icons'
 
-export function Pools() {
+export function Polls() {
   return (
     <VStack flex={1} bgColor="gray.900">
         <Header title="Meus bolões"/>
