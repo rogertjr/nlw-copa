@@ -4,7 +4,7 @@ import { api } from '../services/api'
 import { VStack, useToast, HStack } from "native-base"
 import { Share } from 'react-native'
 import { Header } from "../components/Header"
-import { useNavigation, useRoute } from "@react-navigation/native"
+import { useRoute } from "@react-navigation/native"
 import { Loading } from "../components/Loading"
 import { PollCardPros } from '../components/PollCard'
 import { PollHeader } from "../components/PollHeader"
@@ -23,7 +23,6 @@ export function Details() {
     const [isLoading, setLoading] = useState(false)
     const [optionSelected, setOptionSelected] = useState<'guesses' | 'ranking'>('guesses')
     const toast = useToast()
-    const { navigate } = useNavigation()
 
     async function handleCodeShare() {
         await Share.share({ message: pollDetails.code })
@@ -61,7 +60,7 @@ export function Details() {
                                 <PollHeader data={pollDetails} />
                                 <HStack bgColor="gray.800" px={1} rounded="sm" mb={5}>
                                     <Option title="Seus palpites" isSelected={optionSelected === 'guesses'} onPress={() => setOptionSelected("guesses")} />
-                                    <Option title="Ranking do grupo" isSelected={optionSelected === 'ranking'} onPress={() => setOptionSelected("ranking")} />
+                                    <Option title="Ranking do grupo" isSelected={optionSelected === 'ranking'} onPress={() => setOptionSelected("ranking")} isDisabled={true}/>
                                 </HStack>
                                 <Guesses  pollId={pollDetails.id} code={pollDetails.code} />
                             </VStack>

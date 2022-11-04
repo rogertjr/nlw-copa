@@ -12,14 +12,14 @@ interface Props {
 
 export function Header({ title, showBackButton = false, showShareButton = false, onPress }: Props) {
   const EmptyBoxSpace = () => (<Box w={6} h={6} />)
-  const navigation = useNavigation()
+  const { navigate } = useNavigation()
 
   return (
     <HStack w="full" h={24} bgColor="gray.800" alignItems="flex-end" pb={5} px={5}>
       <HStack w="full" alignItems="center" justifyContent="space-between">
         {
           showBackButton
-            ? <ButtonIcon icon={CaretLeft} onPress={ () => navigation.goBack() }/>
+            ? <ButtonIcon icon={CaretLeft} onPress={ () => navigate('polls') }/>
             : <EmptyBoxSpace />
         }
 
